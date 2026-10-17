@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shalini Yadav | Product Designer</title>
+    <meta name="description"
+        content="Shalini Yadav is a product designer and final-year CSE student at PSIT Kanpur. She designs in Figma and builds working prototypes in code.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0506;
+            --bg2: #150a0c;
+            --card: rgba(21, 10, 12, .78);
+            --red: #e11d2a;
+            --red-d: #7a0d15;
+            --text: #f4f0ee;
+            --muted: #c9bfbd;
+            --line: rgba(255, 255, 255, .14);
+            --line2: rgba(255, 255, 255, .07);
+            --display: 'Anton', Impact, sans-serif;
+            --body: 'Instrument Sans', system-ui, sans-serif
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px
+        }
+
+        body {
+            position: relative;
+            background: var(--bg);
+            color: var(--text);
+            font: 17px/1.6 var(--body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        button {
+            font-family: inherit;
+            color: inherit;
+            background: none;
+            border: none;
+            cursor: pointer
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        .idc:focus-visible {
+            outline: 3px solid var(--red);
+            outline-offset: 4px;
+            border-radius: 4px
+        }
+
+        .wrap {
+            max-width: 1220px;
+            margin: 0 auto;
+            padding: 0 28px
+        }
+
+        .cur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fff;
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 99;
+            transform: translate(-50%, -50%);
+            transition: width .25s, height .25s
+        }
+
+        .cur.big {
+            width: 70px;
+            height: 70px
+        }
+
+        @media(hover:none) {
+            .cur {
+                display: none !important
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 80;
+            background: rgba(11, 5, 6, .85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px
+        }
+
+        .logo {
+            font: 24px var(--display);
+            letter-spacing: .05em
+        }
+
+        .logo b {
+            color: var(--red)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            font-weight: 500;
+            font-size: 15px
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: color .2s
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .pill {
+            display: inline-flex;
+            background: var(--red);
+            color: #fff;
+            padding: 9px 22px;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background .2s, box-shadow .2s
+        }
+
+        .pill:hover {
+            background: #ff2a38;
+            box-shadow: 0 0 20px rgba(225, 29, 42, .5)
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            border: 1px solid var(--line);
+            border-radius: 8px
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--text);
+            transition: transform .25s, opacity .25s
+        }
+
+        .menu-toggle.is-active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg)
+        }
+
+        .menu-toggle.is-active span:nth-child(2) {
+            opacity: 0
+        }
+
+        .menu-toggle.is-active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg)
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 68px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            --mx: 0;
+            --my: 0;
+            background: radial-gradient(circle 560px at calc(74% + var(--mx)*50px) calc(46% + var(--my)*30px), rgba(225, 29, 42, .36), transparent 70%), var(--bg)
+        }
+
+        .hero:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(11, 5, 6, .88), rgba(11, 5, 6, 0) 58%);
+            z-index: 2;
+            pointer-events: none
+        }
+
+        .big {
+            position: absolute;
+            right: -2%;
+            bottom: 16%;
+            font: clamp(90px, 17vw, 270px)/1 var(--display);
+            white-space: nowrap;
+            user-select: none;
+            transform: translate(calc(var(--mx)*-24px), calc(var(--my)*-14px));
+            color: transparent;
+            background: linear-gradient(180deg, var(--red), var(--red-d) 80%, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            opacity: .3;
+            z-index: 1
+        }
+
+        .hero .wrap {
+            position: relative;
+            z-index: 4;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+            gap: 24px;
+            align-items: end;
+            width: 100%;
+            padding-bottom: 104px
+        }
+
+        .hero-lead {
+            align-self: center;
+            max-width: 600px
+        }
+
+        .photo {
+            position: relative;
+            z-index: 3;
+            justify-self: center;
+            width: min(480px, 100%);
+            height: min(72vh, 620px);
+            transform: translate(calc(var(--mx)*14px), calc(var(--my)*6px));
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
+            mask-image: linear-gradient(to bottom, #000 72%, transparent)
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: bottom;
+            filter: contrast(1.04) drop-shadow(0 20px 40px rgba(0, 0, 0, .8))
+        }
+
+        .facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 32px;
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line)
+        }
+
+        .facts div {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.35
+        }
+
+        .facts strong {
+            display: block;
+            color: var(--text);
+            font-size: 15px
+        }
+
+        .story {
+            padding: 130px 0 100px;
+            background: var(--bg)
+        }
+
+        .statement {
+            font: clamp(34px, 5vw, 66px)/1.08 var(--display);
+            text-transform: uppercase;
+            max-width: 1000px;
+            padding-left: 28px;
+            border-left: 4px solid var(--red)
+        }
+
+        .story p.after {
+            color: var(--muted);
+            font-size: 19px;
+            max-width: 620px;
+            margin: 28px 0 0 32px
+        }
+
+        h1 {
+            font: clamp(44px, 5.4vw, 78px)/1 var(--display);
+            text-transform: uppercase;
+            margin: 8px 0 16px;
+            letter-spacing: .02em
+        }
+
+        h1 em,
+        h2 em {
+            font-style: normal;
+            color: var(--red)
+        }
+
+        .hero-intro {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .hero-support {
+            color: var(--muted);
+            margin-bottom: 24px;
+            max-width: 500px
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center
+        }
+
+        .cta,
+        .cta2 {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 26px;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background .25s, color .25s, box-shadow .25s
+        }
+
+        .cta {
+            background: var(--red);
+            color: #fff;
+            border: 1.5px solid var(--red)
+        }
+
+        .cta:hover {
+            background: #ff2a38;
+            box-shadow: 0 0 24px rgba(225, 29, 42, .55)
+        }
+
+        .cta2 {
+            border: 1.5px solid var(--text)
+        }
+
+        .cta2:hover {
+            background: var(--text);
+            color: var(--bg)
+        }
+
+        .sm {
+            padding: 9px 20px;
+            font-size: 14px
+        }
+
+        .mag {
+            transition: transform .25s
+        }
+
+        .mq {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            background: var(--red);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            transform: rotate(-1.2deg) scale(1.03)
+        }
+
+        .mq div {
+            display: inline-block;
+            animation: mq 24s linear infinite;
+            font: 22px var(--display);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: #fff
+        }
+
+        .mq span {
+            margin: 0 20px
+        }
+
+        @keyframes mq {
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative
+        }
+
+        h2 {
+            font: clamp(42px, 6.5vw, 84px)/1 var(--display);
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            letter-spacing: .02em
+        }
+
+        .sub {
+            color: var(--muted);
+            max-width: 640px;
+            margin-bottom: 56px;
+            font-size: 18px
+        }
+
+        .js .rv:not(.in) {
+            clip-path: inset(0 0 100% 0);
+            transform: translateY(30px);
+            opacity: .15
+        }
+
+        .rv {
+            transition: clip-path .9s cubic-bezier(.2, .8, .2, 1), transform .9s cubic-bezier(.2, .8, .2, 1), opacity .9s
+        }
+
+        .work,
+        .skills {
+            background: var(--bg2)
+        }
+
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 72px
+        }
+
+        .project {
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: var(--card);
+            padding: 36px;
+            transition: border-color .3s, box-shadow .3s
+        }
+
+        .project:hover {
+            border-color: rgba(225, 29, 42, .55);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .45)
+        }
+
+        .case {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 48px;
+            align-items: center
+        }
+
+        .case.rev .cover {
+            order: 2
+        }
+
+        .cover {
+            aspect-ratio: 16/11;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            transition: transform .2s;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4)
+        }
+
+        .cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+            background: #fff
+        }
+
+        .cover-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 99px;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(8px);
+            color: #fff
+        }
+
+        .cat {
+            color: var(--red);
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 6px
+        }
+
+        .case h3 {
+            font: clamp(30px, 3.8vw, 44px)/1.05 var(--display);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: .02em
+        }
+
+        .role {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 12px
+        }
+
+        .role span {
+            color: var(--muted);
+            font-weight: 400
+        }
+
+        .desc {
+            color: var(--muted);
+            margin-bottom: 20px
+        }
+
+        .desc strong {
+            color: var(--text)
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px
+        }
+
+        .chip {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--line2);
+            color: var(--muted)
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px
+        }
+
+        .btn-expand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            background: var(--bg);
+            border: 1.5px solid var(--line);
+            padding: 10px 22px;
+            border-radius: 99px;
+            transition: all .25s
+        }
+
+        .btn-expand:hover,
+        .btn-expand[aria-expanded="true"] {
+            border-color: var(--red);
+            color: #fff;
+            background: rgba(225, 29, 42, .1)
+        }
+
+        .arrow {
+            transition: transform .3s
+        }
+
+        .btn-expand[aria-expanded="true"] .arrow {
+            transform: rotate(180deg)
+        }
+
+        .status {
+            font-size: 14px;
+            color: var(--muted);
+            border-left: 2px solid var(--red);
+            padding-left: 10px
+        }
+
+        .strip-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-top: 32px
+        }
+
+        .strip {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 12px 2px 16px
+        }
+
+        .strip::-webkit-scrollbar {
+            height: 6px
+        }
+
+        .strip::-webkit-scrollbar-thumb {
+            background: var(--red-d);
+            border-radius: 99px
+        }
+
+        .g-item {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            text-align: left;
+            cursor: zoom-in;
+            transition: border-color .25s, transform .25s
+        }
+
+        .g-item:hover {
+            border-color: var(--red);
+            transform: translateY(-3px)
+        }
+
+        .g-item img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            object-position: top;
+            background: #fff
+        }
+
+        .g-cap {
+            display: block;
+            padding: 10px 14px 14px;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.4
+        }
+
+        .g-cap b {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 2px
+        }
+
+        .lb {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(5, 2, 3, .94);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 24px
+        }
+
+        .lb[hidden] {
+            display: none
+        }
+
+        .lb img {
+            max-width: min(1200px, 92vw);
+            max-height: 78vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+            background: #fff
+        }
+
+        .lb p {
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+            max-width: 800px
+        }
+
+        .lb button {
+            position: absolute;
+            color: #fff;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid var(--line);
+            border-radius: 99px;
+            width: 46px;
+            height: 46px;
+            font-size: 22px;
+            transition: background .2s
+        }
+
+        .lb button:hover {
+            background: var(--red)
+        }
+
+        .lb-close {
+            top: 20px;
+            right: 20px
+        }
+
+        .lb-prev {
+            left: 20px;
+            top: 50%
+        }
+
+        .lb-next {
+            right: 20px;
+            top: 50%
+        }
+
+        .drawer {
+            display: none;
+            margin-top: 36px;
+            padding-top: 36px;
+            border-top: 1px solid var(--line);
+            animation: fadeIn .4s
+        }
+
+        .drawer.is-open {
+            display: block
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            background: rgba(11, 5, 6, .7);
+            border: 1px solid var(--line2);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 36px
+        }
+
+        .meta-grid span {
+            display: block;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 2px
+        }
+
+        .meta-grid strong {
+            font-size: 15px
+        }
+
+        .flow {
+            display: flex;
+            flex-direction: column;
+            gap: 32px
+        }
+
+        .block {
+            border-left: 2px solid rgba(225, 29, 42, .3);
+            padding-left: 22px
+        }
+
+        .block h4 {
+            font: 24px var(--display);
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            margin-bottom: 10px
+        }
+
+        .block p {
+            color: var(--muted);
+            margin-bottom: 12px
+        }
+
+        .block strong {
+            color: var(--text)
+        }
+
+        .block ul {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            margin-top: 10px
+        }
+
+        .block li {
+            position: relative;
+            padding-left: 20px;
+            color: var(--muted);
+            font-size: 15.5px
+        }
+
+        .block li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--red);
+            font-weight: 700
+        }
+
+        .callout {
+            margin-top: 16px;
+            background: rgba(225, 29, 42, .06);
+            border-left: 3px solid var(--red);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14.5px;
+            color: var(--muted)
+        }
+
+        .callout b {
+            color: var(--text)
+        }
+
+        .drawer-foot {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line2)
+        }
+
+        .process {
+            background: var(--bg)
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            position: relative;
+            border-top: 2px solid var(--line)
+        }
+
+        .steps::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            height: 2px;
+            width: var(--p, 0%);
+            background: var(--red);
+            transition: width 1.6s cubic-bezier(.2, .8, .2, 1)
+        }
+
+        .step {
+            padding: 32px 28px 0 0
+        }
+
+        .step h3 {
+            font: 26px var(--display);
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 15.5px
+        }
+
+        .grid-caps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            background: var(--card);
+            transition: border-color .25s, transform .25s
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(280px circle at var(--x, 50%) var(--y, 50%), rgba(225, 29, 42, .26), transparent 70%);
+            opacity: 0;
+            transition: opacity .25s;
+            pointer-events: none
+        }
+
+        .card:hover {
+            border-color: var(--red);
+            transform: translateY(-3px)
+        }
+
+        .card:hover::before {
+            opacity: 1
+        }
+
+        .card>* {
+            position: relative
+        }
+
+        .card h3 {
+            font: 28px var(--display);
+            text-transform: uppercase;
+            margin-bottom: 16px
+        }
+
+        .card ul {
+            list-style: none;
+            display: grid;
+            gap: 10px
+        }
+
+        .card li {
+            display: flex;
+            gap: 10px
+        }
+
+        .card li::before {
+            content: "•";
+            color: var(--red);
+            font-weight: 700
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-bottom: 8px;
+            max-width: 900px
+        }
+
+        .wide {
+            grid-column: 1/-1;
+            border-color: rgba(225, 29, 42, .4);
+            background: linear-gradient(135deg, rgba(225, 29, 42, .1), rgba(21, 10, 12, .8))
+        }
+
+        .about {
+            background: var(--bg)
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 56px;
+            align-items: center
+        }
+
+        .about-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px
+        }
+
+        .about-copy p {
+            color: var(--muted)
+        }
+
+        .about-copy strong {
+            color: var(--text)
+        }
+
+        .idwrap {
+            display: flex;
+            justify-content: center
+        }
+
+        .idc {
+            width: 280px;
+            transform-origin: 50% 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: grab;
+            will-change: transform
+        }
+
+        .idc:before {
+            content: "";
+            width: 18px;
+            height: 18px;
+            border: 3px solid var(--text);
+            border-radius: 50%;
+            margin-bottom: -6px
+        }
+
+        .strap {
+            width: 30px;
+            height: 120px;
+            background: repeating-linear-gradient(180deg, var(--red) 0 16px, #b3121f 16px 18px)
+        }
+
+        .clip {
+            width: 34px;
+            height: 24px;
+            background: #cfc8c3;
+            border-radius: 4px 4px 9px 9px;
+            position: relative;
+            z-index: 2
+        }
+
+        .cid {
+            width: 100%;
+            background: #f6f0ea;
+            color: #1a0a0d;
+            border-radius: 16px;
+            padding: 34px 18px 16px;
+            position: relative;
+            margin-top: -14px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .55)
+        }
+
+        .cid:before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            width: 50px;
+            height: 8px;
+            border-radius: 8px;
+            background: var(--bg2);
+            transform: translateX(-50%)
+        }
+
+        .cid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 10px;
+            background: var(--red);
+            display: block
+        }
+
+        .cid h3 {
+            font: 30px/1.1 var(--display);
+            margin: 14px 0 0
+        }
+
+        .cid .r {
+            font-weight: 700;
+            color: #b3121f;
+            margin: 0 0 8px
+        }
+
+        .cid dl {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3px 12px;
+            font-size: 13.5px;
+            margin-bottom: 12px
+        }
+
+        .cid dt {
+            color: #7a6a6c
+        }
+
+        .cid dd {
+            font-weight: 600
+        }
+
+        .bar {
+            height: 26px;
+            background: repeating-linear-gradient(90deg, #1a0a0d 0 2px, transparent 2px 4px, #1a0a0d 4px 5px, transparent 5px 8px)
+        }
+
+        .contact {
+            text-align: center;
+            padding: 140px 0 60px;
+            background: radial-gradient(800px 480px at 50% 100%, rgba(225, 29, 42, .32), transparent 72%), var(--bg2)
+        }
+
+        .contact h2 {
+            font-size: clamp(52px, 8.5vw, 130px)
+        }
+
+        .contact-sub {
+            color: var(--muted);
+            font-size: 18.5px;
+            max-width: 620px;
+            margin: 16px auto 36px
+        }
+
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .mail {
+            font-size: clamp(22px, 3.2vw, 34px);
+            font-weight: 600;
+            border-bottom: 3px solid var(--red);
+            padding-bottom: 2px;
+            transition: color .2s
+        }
+
+        .mail:hover {
+            color: var(--red)
+        }
+
+        .copy-btn {
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--line);
+            padding: 8px 16px;
+            border-radius: 99px;
+            transition: background .2s
+        }
+
+        .copy-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff
+        }
+
+        .social {
+            display: flex;
+            gap: 28px;
+            justify-content: center;
+            color: var(--muted);
+            font-weight: 600;
+            font-size: 15px
+        }
+
+        .social a:hover {
+            color: var(--text)
+        }
+
+        footer {
+            margin-top: 80px;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--line);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px
+        }
+
+        @media(max-width:860px) {
+            .menu-toggle {
+                display: flex
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: rgba(11, 5, 6, .98);
+                border-bottom: 1px solid var(--line);
+                flex-direction: column;
+                padding: 24px 28px;
+                gap: 20px
+            }
+
+            .nav-links.is-open {
+                display: flex
+            }
+
+            .hero {
+                align-items: flex-start;
+                padding-top: 84px
+            }
+
+            .hero:after {
+                display: none
+            }
+
+            .big {
+                right: auto;
+                left: 50%;
+                bottom: auto;
+                top: 96px;
+                transform: translateX(-50%)
+            }
+
+            .photo {
+                order: -1;
+                height: 340px;
+                width: min(300px, 80%)
+            }
+
+            .statement {
+                padding-left: 18px
+            }
+
+            .story p.after {
+                margin-left: 22px
+            }
+
+            .hero .wrap {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding-bottom: 100px
+            }
+
+            .case,
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 28px
+            }
+
+            .case.rev .cover {
+                order: 0
+            }
+
+            .steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px
+            }
+
+            .g-item {
+                flex-basis: 230px
+            }
+
+            section {
+                padding: 80px 0
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center
+            }
+        }
+
+        @media(max-width:540px) {
+            .steps {
+                grid-template-columns: 1fr
+            }
+
+            .project {
+                padding: 22px
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch
+            }
+
+            .cta,
+            .cta2 {
+                justify-content: center
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .rv {
+                clip-path: none !important;
+                transform: none !important;
+                opacity: 1 !important
+            }
+        }
+    </style>
+</head>
+
+<body class="js">
+    <div class="cur" id="cur" aria-hidden="true"></div>
+
+    <nav aria-label="Main navigation">
+        <div class="wrap">
+            <a class="logo" href="#top" aria-label="Shalini Yadav, home">SHALINI YADAV<b>.</b></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#work">Work</a></li>
+                <li><a href="#approach">How I work</a></li>
+                <li><a href="#skills">What I bring</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a class="pill mag" href="#contact">Hire Me</a>
+                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation menu"
+                    aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="big" aria-hidden="true">PORTFOLIO</div>
+        <div class="wrap">
+            <div class="hero-lead">
+                <h1>I used to sketch dresses. Now I sketch <em>screens.</em></h1>
+                <p class="hero-intro">I’m Shalini Yadav, a product designer and final-year CSE student at PSIT Kanpur.
+                </p>
+                <p class="hero-support">Computer science taught me how products get built. Design taught me why people
+                    use them. I do both, and I’m looking for a product design internship where I can do it on a real
+                    team.</p>
+                <div class="hero-actions">
+                    <a class="cta mag" href="#work">See the work ↓</a>
+                    <a class="cta2 mag" href="/resume.pdf" download>Resume ↓</a>
+                    <a class="cta2 mag" href="mailto:syhalini@gmail.com">Email me</a>
+                </div>
+                <div class="facts">
+                    <div><strong>B.Tech CSE ’27</strong>PSIT Kanpur</div>
+                    <div><strong>Looking for</strong>Product design internship</div>
+                    <div><strong>Built and live</strong>KAI, an AI well-being app</div>
+                </div>
+            </div>
+            <div class="photo"><img src="photo2.png" alt="Shalini Yadav" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="mq" aria-hidden="true">
+            <div>
+                <span>User Flows</span><span>✦</span><span>Screen Hierarchy</span><span>✦</span><span>Interaction
+                    States</span><span>✦</span><span>Prototyping</span><span>✦</span><span>Responsive
+                    Design</span><span>✦</span><span>Edge Cases</span><span>✦</span>
+                <span>User Flows</span><span>✦</span><span>Screen Hierarchy</span><span>✦</span><span>Interaction
+                    States</span><span>✦</span><span>Prototyping</span><span>✦</span><span>Responsive
+                    Design</span><span>✦</span><span>Edge Cases</span><span>✦</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="story" aria-label="Introduction">
+        <div class="wrap">
+            <p class="statement rv">Most portfolios show finished screens. I’ll show you the decisions behind mine,
+                including what I’d change.</p>
+            <p class="after">Two products below. One I designed and built myself, one I built with a team. Both taught
+                me something I now use on every screen.</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="work" id="work">
+            <div class="wrap">
+                <h2 class="rv">Two products, two <em>real problems</em></h2>
+                <p class="sub">I design the screen, then build it to see if it holds up. Open a case study to see the
+                    decisions behind each one.</p>
+                <div class="projects">
+
+                    <article class="project" id="project-kai">
+                        <div class="case">
+                            <div class="cover" data-tilt><img src="Screenshot%202026-10-10%20195041.png"
+                                    alt="KAI landing page with chat preview"><span class="cover-tag">Responsive web
+                                    app</span></div>
+                            <div>
+                                <div class="cat">Well-being, conversational UX</div>
+                                <h3>KAI: An AI well-being companion for students in India</h3>
+                                <div class="role">Role: <span>Product design and KAI 2.0 development</span></div>
+                                <p class="desc"><strong>The problem:</strong> well-being tools feel clinical, and
+                                    students won’t fill in a form about their feelings.<br><strong>What I did:</strong>
+                                    designed and built a chat-first app in English and Hinglish with mood check-ins,
+                                    journaling, breathing exercises and helplines, and no sign-up
+                                    wall.<br><strong>Proof:</strong> it’s live, so you can try it.</p>
+                                <div class="chips"><span class="chip">Conversational UX</span><span
+                                        class="chip">Anonymous onboarding</span><span class="chip">Error & fallback
+                                        states</span><span class="chip">Figma</span><span class="chip">React,
+                                        TypeScript</span></div>
+                                <div class="actions">
+                                    <button class="btn-expand mag" type="button" aria-expanded="false"
+                                        aria-controls="drawer-kai" data-drawer="drawer-kai"><span class="lbl">Explore
+                                            case study</span><span class="arrow" aria-hidden="true">▾</span></button>
+                                    <a class="cta2 sm" href="https://kai-version-2-0.vercel.app/" target="_blank"
+                                        rel="noopener noreferrer">Live prototype ↗</a>
+                                    <a class="cta2 sm" href="https://github.com/shalini355/KAI-Version-2.0"
+                                        target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="strip-label">Screens (tap to enlarge)</div>
+                        <div class="strip" data-set="kai"></div>
+                        <div class="drawer" id="drawer-kai" role="region" aria-label="KAI case study">
+                            <div class="meta-grid">
+                                <div><span>Type</span><strong>AI well-being web app</strong></div>
+                                <div><span>Tools</span><strong>Figma, React, TypeScript, Tailwind, Node.js, Gemini
+                                        API</strong></div>
+                                <div><span>Status</span><strong>KAI 2.0 built, KAI 3.0 only proposed</strong></div>
+                            </div>
+                            <div class="flow">
+                                <div class="block">
+                                    <h4>The problem</h4>
+                                    <p>Exams, placements and deadlines pile up, and reflecting on how you feel shouldn’t
+                                        feel like filling in a medical form. Three gaps shaped the design:
+                                        <strong>clinical language</strong>, <strong>no clear next step</strong> after
+                                        venting, and <strong>sign-up friction</strong> before anyone can try it. These
+                                        are design hypotheses from my brief, not findings from user research.</p>
+                                </div>
+                                <div class="block">
+                                    <h4>What I designed</h4>
+                                    <ul>
+                                        <li><strong>Hinglish-friendly chat</strong> with quick-reply chips so users can
+                                            respond in one tap.</li>
+                                        <li><strong>Anonymous start</strong> so there is no account wall.</li>
+                                        <li><strong>Mood log</strong> with intensity and tags that turns into a short
+                                            summary.</li>
+                                        <li><strong>Support screen</strong> with Tele-MANAS, iCall and 112 as one-tap
+                                            call buttons.</li>
+                                        <li><strong>Calm fallback copy</strong> when the AI is unavailable, offering
+                                            journaling or breathing instead of a raw error.</li>
+                                    </ul>
+                                </div>
+                                <div class="block">
+                                    <h4>Principles I followed</h4>
+                                    <ul>
+                                        <li><strong>Warm, not clinical:</strong> plain, conversational language.</li>
+                                        <li><strong>Small steps:</strong> one or two actions, never a long list.</li>
+                                        <li><strong>Honest limits:</strong> KAI says what it can’t do.</li>
+                                    </ul>
+                                </div>
+                                <div class="block">
+                                    <h4>What’s next</h4>
+                                    <p>I’ve drafted a KAI 3.0 direction: a daily check-in, an explainable score and a
+                                        stronger safety flow. It is proposed, not built or tested. First step is
+                                        usability sessions with 5 to 8 students on the core check-in.</p>
+                                    <div class="callout"><b>Scope note:</b> KAI is a student prototype, not a therapist,
+                                        diagnostic tool or emergency service. It hasn’t had formal user research or
+                                        clinical review.</div>
+                                </div>
+                            </div>
+                            <div class="drawer-foot"><button class="btn-expand" type="button" aria-expanded="true"
+                                    aria-controls="drawer-kai" data-drawer="drawer-kai"><span class="lbl">Close case
+                                        study</span><span class="arrow" aria-hidden="true">▾</span></button></div>
+                        </div>
+                    </article>
+
+                    <article class="project" id="project-quiz">
+                        <div class="case rev">
+                            <div class="cover" data-tilt><img src="Screenshot%202026-10-10%20200434.png"
+                                    alt="Quiz Buddy landing page"><span class="cover-tag">Team project</span></div>
+                            <div>
+                                <div class="cat">EdTech, programming practice</div>
+                                <h3>Quiz Buddy: A clearer journey for programming practice</h3>
+                                <div class="role">Role: <span>UI design and front-end code (HTML/CSS/JS)</span></div>
+                                <p class="desc"><strong>The problem:</strong> beginners don’t know what to practise or
+                                    how they did.<br><strong>What I did:</strong> designed and built the front end, from
+                                    the setup flow to the results screen, and made it cope with missing data. Teammates
+                                    built the backend.</p>
+                                <div class="chips"><span class="chip">Setup flow</span><span class="chip">Responsive
+                                        layout</span><span class="chip">Defensive UI states</span><span
+                                        class="chip">HTML, CSS, JS</span></div>
+                                <div class="actions"><button class="btn-expand mag" type="button" aria-expanded="false"
+                                        aria-controls="drawer-quiz" data-drawer="drawer-quiz"><span class="lbl">Explore
+                                            case study</span><span class="arrow" aria-hidden="true">▾</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="strip-label">Screens (tap to enlarge)</div>
+                        <div class="strip" data-set="quiz"></div>
+                        <div class="drawer" id="drawer-quiz" role="region" aria-label="Quiz Buddy case study">
+                            <div class="meta-grid">
+                                <div><span>Type</span><strong>Programming practice web app</strong></div>
+                                <div><span>My part</span><strong>Front end, responsive UI, quiz interactions</strong>
+                                </div>
+                                <div><span>Team</span><strong>Teammates built the backend</strong></div>
+                            </div>
+                            <div class="flow">
+                                <div class="block">
+                                    <h4>The problem</h4>
+                                    <p>Beginners need to choose what to practise and see how they did. Unclear settings,
+                                        inconsistent question layouts and thin answer feedback made practice confusing.
+                                    </p>
+                                </div>
+                                <div class="block">
+                                    <h4>Decisions I made</h4>
+                                    <ul>
+                                        <li><strong>Configure before starting:</strong> language, difficulty and
+                                            category sit in one clear setup step.</li>
+                                        <li><strong>Handle missing content:</strong> explanations show when available,
+                                            with a useful fallback when they aren’t.</li>
+                                    </ul>
+                                </div>
+                                <div class="block">
+                                    <h4>What I learned</h4>
+                                    <p>Know which data fields are required or optional before building components. It
+                                        prevents layout bugs and rework, and it showed me why designers and developers
+                                        should talk early.</p>
+                                </div>
+                                <div class="block">
+                                    <h4>What I’d improve today</h4>
+                                    <ul>
+                                        <li>A shared colour, type and component system across screens.</li>
+                                        <li>Better contrast and keyboard focus states.</li>
+                                        <li>A results screen that links answer review to what to practise next.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="drawer-foot"><button class="btn-expand" type="button" aria-expanded="true"
+                                    aria-controls="drawer-quiz" data-drawer="drawer-quiz"><span class="lbl">Close case
+                                        study</span><span class="arrow" aria-hidden="true">▾</span></button></div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="process" id="approach">
+            <div class="wrap">
+                <h2 class="rv">How I decide what to <em>design</em></h2>
+                <p class="sub">No fixed framework. Four questions I ask before I open Figma, and again before I hand
+                    off.</p>
+                <div class="steps" id="steps">
+                    <div class="step">
+                        <h3>What is confusing?</h3>
+                        <p>Before drawing rectangles in Figma, I write down what the user is trying to do and where they
+                            might hesitate, get lost or give up.</p>
+                    </div>
+                    <div class="step">
+                        <h3>What if it fails?</h3>
+                        <p>Happy paths are easy. I map edge cases early: empty results, slow responses and an accidental
+                            tap on Back.</p>
+                    </div>
+                    <div class="step">
+                        <h3>Is it clear in 3 seconds?</h3>
+                        <p>I check hierarchy: what catches the eye first and whether the main button is unmistakable.
+                        </p>
+                    </div>
+                    <div class="step">
+                        <h3>Does it hold in code?</h3>
+                        <p>As a CS student I check layout shifts, heavy queries and mobile rendering while I design.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills" id="skills">
+            <div class="wrap">
+                <h2 class="rv">What I bring to a <em>team</em></h2>
+                <p class="sub">A designer who can build, so handoff is a conversation instead of a guess.</p>
+                <div class="grid-caps">
+                    <div class="card">
+                        <h3>I design</h3>
+                        <ul>
+                            <li>User flows and screen hierarchy</li>
+                            <li>Responsive mobile and desktop UI</li>
+                            <li>Empty, error and loading states</li>
+                            <li>Clickable prototypes in Figma and FigJam</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>I build</h3>
+                        <ul>
+                            <li>HTML, CSS and JavaScript</li>
+                            <li>React, TypeScript and Tailwind</li>
+                            <li>Git and GitHub</li>
+                            <li>Working prototypes people can try</li>
+                        </ul>
+                    </div>
+                    <div class="card wide">
+                        <h3>I work well with engineers</h3>
+                        <p>Because I write code, I know what’s expensive to build and what breaks on mobile. I can
+                            design something and tell you honestly how hard it is to ship.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="wrap">
+                <div class="about-grid">
+                    <div class="idwrap">
+                        <div class="idc" id="idc" tabindex="0"
+                            aria-label="Shalini’s ID card. Hover or tap to swing it.">
+                            <div class="strap" aria-hidden="true"></div>
+                            <div class="clip" aria-hidden="true"></div>
+                            <div class="cid">
+                                <img src="photo2.png" alt="Shalini Yadav" onerror="this.style.display='none'">
+                                <h3>Shalini Yadav</h3>
+                                <p class="r">Product designer</p>
+                                <dl>
+                                    <dt>Batch</dt>
+                                    <dd>B.Tech CSE 2027</dd>
+                                    <dt>College</dt>
+                                    <dd>PSIT Kanpur</dd>
+                                    <dt>Uses</dt>
+                                    <dd>Figma, React, CSS</dd>
+                                    <dt>Status</dt>
+                                    <dd>Open to internships</dd>
+                                </dl>
+                                <div class="bar" aria-hidden="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-copy">
+                        <h2 class="rv">The designer behind <em>the screens</em></h2>
+                        <p>I wanted to be a fashion designer. A good outfit changes how someone carries themselves, and
+                            I still draw whenever I get free time.</p>
+                        <p>Then I started studying computer science and found the same feeling in product design: when
+                            an interface is clear, people feel calmer and more confident. That’s why I care about honest
+                            explanations and what happens when something fails.</p>
+                        <p>I design in Figma and build with web technologies, so I think about the experience and the
+                            implementation together. KAI and Quiz Buddy are where I learned that.</p>
+                        <p>I’m in my final year at PSIT Kanpur and looking for a <strong>product design internship or
+                                junior role</strong> with a team that gives honest feedback. I ask for critique early,
+                            and I’d rather ship something small that works than something big that doesn’t.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="wrap">
+                <h2 class="rv">Let’s <em>talk.</em></h2>
+                <p class="contact-sub">If you need a designer who can also build, I’d love to hear about your team. I’m
+                    available for a product design internship or junior role.</p>
+                <div class="contact-row">
+                    <a class="mail mag" href="mailto:syhalini@gmail.com">syhalini@gmail.com</a>
+                    <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy email address"><span
+                            id="copyText">Copy email</span></button>
+                </div>
+                <nav class="social" aria-label="Profiles">
+                    <a href="/resume.pdf" download>Resume ↓</a>
+                    <a href="https://linkedin.com/in/shalini-yadav-355abc" target="_blank"
+                        rel="noopener noreferrer">LinkedIn ↗</a>
+                    <a href="https://github.com/shalini355" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </nav>
+                <footer><span>© 2026 Shalini Yadav</span><span>Kanpur, India. Open for internships.</span></footer>
+            </div>
+        </section>
+    </main>
+
+    <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+        <button class="lb-close" id="lbClose" type="button" aria-label="Close">✕</button>
+        <button class="lb-prev" id="lbPrev" type="button" aria-label="Previous screen">‹</button>
+        <img id="lbImg" src="" alt="">
+        <p id="lbCap"></p>
+        <button class="lb-next" id="lbNext" type="button" aria-label="Next screen">›</button>
+    </div>
+
+    <script>
+        const $ = (s, c = document) => [...c.querySelectorAll(s)];
+        const still = matchMedia('(prefers-reduced-motion:reduce)').matches, canHover = matchMedia('(hover:hover)').matches;
+        const SHOTS = {
+            kai: [["Screenshot 2026-10-10 195041.png", "Landing", "Hero line, two CTAs and a live chat preview"],
+            ["Screenshot 2026-10-10 195052.png", "Landing: chat preview", "Example conversation in a Hinglish tone"],
+            ["Screenshot 2026-10-10 195146.png", "Chat", "Quick-reply chips, typing indicator, privacy note, helpline link"],
+            ["Screenshot 2026-10-10 195225.png", "Mood log", "Mood picker, intensity slider, tags, check-in summary"],
+            ["Screenshot 2026-10-10 195243.png", "Wellness hub", "Journal prompts, box breathing, daily anchors"],
+            ["Screenshot 2026-10-10 195255.png", "Support and helplines", "Tele-MANAS, iCall and 112 with clear call buttons"],
+            ["Screenshot 2026-10-10 195323.png", "Dark mode", "Instant mood check-in with a calmer dark theme"]],
+            quiz: [["Screenshot 2026-10-10 200434.png", "Landing page", "Intro, register button and navigation"],
+            ["Screenshot 2026-10-11 134128.png", "Dashboard", "Profile, badges, quick actions and leaderboard"],
+            ["Screenshot 2026-10-11 134212.png", "Quiz setup", "Pick language, difficulty level and category"],
+            ["Screenshot 2026-10-11 134251.png", "Results", "Score, answer review with explanation, badge earned"],
+            ["Screenshot 2026-10-11 134307.png", "Admin panel", "Quiz management, analytics and event creation"],
+            ["Screenshot 2026-10-11 134323.png", "My quizzes", "History table with date, score and details"]]
+        };
+        const lb = $('#lb')[0], lbImg = $('#lbImg')[0], lbCap = $('#lbCap')[0]; let cs = [], ci = 0;
+        const showShot = () => { const [f, t, c] = cs[ci]; lbImg.src = encodeURI(f); lbImg.alt = t + ': ' + c; lbCap.textContent = (ci + 1) + ' / ' + cs.length + '  ' + t + ': ' + c };
+        const openLB = (s, i) => { cs = s; ci = i; showShot(); lb.hidden = false; document.body.style.overflow = 'hidden'; $('#lbClose')[0].focus() };
+        const closeLB = () => { lb.hidden = true; document.body.style.overflow = '' };
+        const stepLB = d => { ci = (ci + d + cs.length) % cs.length; showShot() };
+        $('.strip').forEach(st => {
+            const s = SHOTS[st.dataset.set] || []; s.forEach(([f, t, c], i) => {
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'g-item';
+                b.innerHTML = `<img src="${encodeURI(f)}" alt="${t}: ${c}" loading="lazy"><span class="g-cap"><b>${t}</b>${c}</span>`; b.addEventListener('click', () => openLB(s, i)); st.appendChild(b)
+            })
+        });
+        $('#lbClose')[0].onclick = closeLB; $('#lbPrev')[0].onclick = () => stepLB(-1); $('#lbNext')[0].onclick = () => stepLB(1);
+        lb.onclick = e => { if (e.target === lb) closeLB() };
+        addEventListener('keydown', e => { if (lb.hidden) return; if (e.key === 'Escape') closeLB(); if (e.key === 'ArrowLeft') stepLB(-1); if (e.key === 'ArrowRight') stepLB(1) });
+        const cur = $('#cur')[0];
+        if (canHover) {
+            addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px' });
+            $('a,button,.card,[data-tilt],.idc').forEach(el => { el.addEventListener('mouseenter', () => cur.classList.add('big')); el.addEventListener('mouseleave', () => cur.classList.remove('big')) })
+        }
+        const hero = $('.hero')[0];
+        if (!still && canHover) {
+            hero.addEventListener('mousemove', e => { hero.style.setProperty('--mx', (e.clientX / innerWidth - .5) * 2); hero.style.setProperty('--my', (e.clientY / innerHeight - .5) * 2) });
+            $('.mag').forEach(b => { b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px,${(e.clientY - r.top - r.height / 2) * .35}px)` }); b.addEventListener('mouseleave', () => b.style.transform = '') });
+            $('[data-tilt]').forEach(c => { c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(800px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) scale(1.02)` }); c.addEventListener('mouseleave', () => c.style.transform = '') })
+        }
+        $('.card').forEach(c => c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--x', (e.clientX - r.left) + 'px'); c.style.setProperty('--y', (e.clientY - r.top) + 'px') }));
+        /* ID card: spring physics, so it swings and settles smoothly */
+        const idc = $('#idc')[0]; let ang = 0, vel = 0, last = performance.now(), vis = true;
+        if (!still) {
+            new IntersectionObserver(e => vis = e[0].isIntersecting).observe(idc);
+            const kick = v => { vel = Math.max(-160, Math.min(160, vel + v)) }; let flip = 1;
+            idc.addEventListener('mouseenter', e => { const r = idc.getBoundingClientRect(); kick(e.clientX < r.left + r.width / 2 ? 85 : -85) });
+            idc.addEventListener('mousemove', e => kick(e.movementX * .9));
+            idc.addEventListener('click', () => { flip = -flip; kick(95 * flip) });
+            (function f(t) {
+                const dt = Math.min((t - last) / 1000, .032); last = t;
+                if (vis) { const rest = Math.sin(t / 1700) * 1.1; vel += (-30 * (ang - rest) - 2.8 * vel) * dt; ang += vel * dt; idc.style.transform = `rotate(${ang.toFixed(3)}deg)` }
+                requestAnimationFrame(f)
+            })(last)
+        }
+        /* drawers */
+        $('.btn-expand').forEach(btn => btn.addEventListener('click', () => {
+            const dr = document.getElementById(btn.dataset.drawer); if (!dr) return; const open = !dr.classList.contains('is-open'); dr.classList.toggle('is-open', open);
+            const card = btn.closest('.project'), main = card.querySelector('.actions .btn-expand');
+            card.querySelectorAll('.btn-expand').forEach(b => b.setAttribute('aria-expanded', open));
+            if (main) main.querySelector('.lbl').textContent = open ? 'Collapse case study' : 'Explore case study';
+            if (open) setTimeout(() => dr.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); else card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }));
+        const mt = $('#menuToggle')[0], nl = $('#navLinks')[0];
+        mt.addEventListener('click', () => { const o = nl.classList.toggle('is-open'); mt.classList.toggle('is-active', o); mt.setAttribute('aria-expanded', o) });
+        $('a', nl).forEach(a => a.addEventListener('click', () => { nl.classList.remove('is-open'); mt.classList.remove('is-active'); mt.setAttribute('aria-expanded', 'false') }));
+        const cb = $('#copyBtn')[0], ct = $('#copyText')[0];
+        cb.addEventListener('click', () => { navigator.clipboard.writeText('syhalini@gmail.com').then(() => { ct.textContent = 'Copied!'; setTimeout(() => ct.textContent = 'Copy email', 2200) }).catch(() => { location.href = 'mailto:syhalini@gmail.com' }) });
+        const rv = $('.rv');
+        if ('IntersectionObserver' in window && !still) { const o = new IntersectionObserver((es, ob) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ob.unobserve(e.target) } }), { threshold: .05, rootMargin: '0px 0px -40px 0px' }); rv.forEach(el => o.observe(el)) } else rv.forEach(el => el.classList.add('in'));
+        setTimeout(() => rv.forEach(el => el.classList.add('in')), 1800);
+        const steps = $('#steps')[0];
+        if ('IntersectionObserver' in window) { const o = new IntersectionObserver((es, ob) => es.forEach(e => { if (e.isIntersecting) { e.target.style.setProperty('--p', '100%'); ob.unobserve(e.target) } }), { threshold: .3 }); o.observe(steps) } else steps.style.setProperty('--p', '100%');
+    </script>
+</body>
+
+</html>
